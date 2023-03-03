@@ -110,20 +110,51 @@ switch (playerSelection){
         }
         break;
 }
-// returns result string
-return resultHelper(playerSelection, computerSelection, result);
+// originally returns result string
+//  return resultHelper(playerSelection, computerSelection, result);
+// now returns result
+return result;
 }
 
-/* below is for testing playRound
+/* below is for testing playRound (with result string return implementation)
 const playerSelection = "rock";
 const computerSelection = getComputerChoice();
 console.log(playRound(playerSelection, computerSelection));
 */
 
 // game()
-// create variables for wins, losses, and ties
+function game(){
+// create variables for result, wins, and losses (and player and computer selections)
+let result;
+let wins = 0;
+let losses = 0;
+let pS;
+let cS;
 // make for loop to count games up to five
+for (let i = 0; i < 5; i++){
+//   Store playerSelection
+    pS = prompt("What is your selection: Rock, Paper, or Scissors?");
+//   Store computerSelection
+    cS = getComputerChoice();
 //   run game and store result in correct counter variable
+    result = playRound(pS, cS);
+    if (result == "Win"){
+        wins++;
+    } else if (result == "Loss"){
+        losses++;
+    }
+    // if tie, doesn't need to be stored
+    // displays result of that round
+    console.log(resultHelper(pS, cS, result))
+}
 // if wins is larger than losses result is win
+if (wins > losses){
+    console.log("Congrats, You Win!");
 // if losses is larger than wins result is loss
+} else if (losses > wins){
+    console.log("Sorry, You Lose!");
 // else result is tie
+} else {
+    console.log("You Tied!")
+}
+}
