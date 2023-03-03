@@ -14,10 +14,20 @@
 */
 
 // getComputerChoice()
+function getComputerChoice(){
 // generate random number from 0-2
+let num = Math.floor(Math.random()*3);
 // if number is 0 return rock
+if (num == 0){
+    return "Rock";
 // if number is 1 return paper
+} else if (num == 1){
+    return "Paper";
 // if number is 2 return scissors
+} else {
+    return "Scissors";
+}
+}
 
 // playRound(playerSelection, computerSelection)
 // if pS is rock
