@@ -111,9 +111,9 @@ switch (playerSelection){
         break;
 }
 // originally returns result string
-//  return resultHelper(playerSelection, computerSelection, result);
+ // return resultHelper(playerSelection, computerSelection, result);
 // now returns result
-return result;
+ return result;
 }
 
 /* below is for testing playRound (with result string return implementation)
@@ -121,6 +121,8 @@ const playerSelection = "rock";
 const computerSelection = getComputerChoice();
 console.log(playRound(playerSelection, computerSelection));
 */
+
+/*
 
 // game()
 function game(){
@@ -158,3 +160,29 @@ if (wins > losses){
     console.log("You Tied!")
 }
 }
+*/
+
+// these methods don't put each result on a new line and i can't figure out
+//   how to do so. I'm on step 3 of the UI design
+
+const rock = document.querySelector('#rock');
+const paper = document.querySelector('#paper');
+const scissors = document.querySelector('#scissors');
+const results = document.querySelector('#results');
+
+rock.addEventListener('click', () => {
+    let cS = getComputerChoice()
+    let res = playRound("Rock", cS);
+    results.textContent += resultHelper("Rock", cS, res);
+});
+paper.addEventListener('click', () => {
+    let cS = getComputerChoice()
+    let res = playRound("Paper", cS);
+    results.textContent += resultHelper("Paper", cS, res);
+});
+scissors.addEventListener('click', () => {
+    let cS = getComputerChoice()
+    let res = playRound("Scissors", cS);
+    results.textContent += resultHelper("Scissors", cS, res);
+});
+
