@@ -162,7 +162,6 @@ if (wins > losses){
 }
 */
 
-// how to get each result on a new line?
 
 const rock = document.querySelector('#rock');
 const paper = document.querySelector('#paper');
