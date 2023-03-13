@@ -199,43 +199,33 @@ function findWhoWon(){
 function updateDisplay(){
     score.textContent = `Wins: ${wins}, Losses: ${losses}, Ties: ${ties}.`;
     if (gameCount === 5){
-        score.textContent += findWhoWon();
+        score.innerHTML += "<br/>" + findWhoWon();
+    }
+}
+
+function handleClick(choice){
+    let cS = getComputerChoice()
+    let res = playRound(choice, cS);
+    results.innerHTML += resultHelper(choice, cS, res) + "<br/>";
+    incrementResults(res);
+    updateDisplay();
+    if (gameCount === 5){
+        buttons.forEach((button) => {button.disabled = true;})
     }
 }
 
 rock.addEventListener('click', () => {
-    let cS = getComputerChoice()
-    let res = playRound("Rock", cS);
-    results.textContent += resultHelper("Rock", cS, res);
-    incrementResults(res);
-    updateDisplay();
-    if (gameCount === 5){
-        buttons.forEach((button) => {button.disabled = true;})
-    }
+    handleClick("Rock");
 });
 paper.addEventListener('click', () => {
-    let cS = getComputerChoice()
-    let res = playRound("Paper", cS);
-    results.textContent += resultHelper("Paper", cS, res);
-    incrementResults(res);
-    updateDisplay();
-    if (gameCount === 5){
-        buttons.forEach((button) => {button.disabled = true;})
-    }
+    handleClick("Paper");
 });
 scissors.addEventListener('click', () => {
-    let cS = getComputerChoice()
-    let res = playRound("Scissors", cS);
-    results.textContent += resultHelper("Scissors", cS, res);
-    incrementResults(res);
-    updateDisplay();
-    if (gameCount === 5){
-        buttons.forEach((button) => {button.disabled = true;})
-    }
+    handleClick("Scissors");
 });
 
 const score = document.createElement('div');
-score.textContent = `Wins: ${wins}, Losses: ${losses}, Ties: ${ties}.`;
+score.innerHTML = `Wins: ${wins}, Losses: ${losses}, Ties: ${ties}.`;
 
 const body = document.querySelector('body');
 body.appendChild(score);
