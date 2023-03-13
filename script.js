@@ -162,27 +162,83 @@ if (wins > losses){
 }
 */
 
-// these methods don't put each result on a new line and i can't figure out
-//   how to do so. I'm on step 3 of the UI design
+// how to get each result on a new line?
 
 const rock = document.querySelector('#rock');
 const paper = document.querySelector('#paper');
 const scissors = document.querySelector('#scissors');
+const buttons = document.querySelectorAll('button');
 const results = document.querySelector('#results');
+let gameCount = 0;
+let wins = 0;
+let losses = 0;
+let ties = 0;
+
+function incrementResults(res){
+    if (res === "Win"){
+        wins++
+    } else if (res === "Loss"){
+        losses++;
+    } else {
+        ties++;
+    }
+    gameCount++;
+}
+
+function findWhoWon(){
+    if (wins > losses){
+        return "Congrats, You Win!";
+    } else if (losses > wins){
+        return "Sorry, You Lose!";
+    // else result is tie
+    } else {
+        return "You Tied!";
+    }
+}
+
+function updateDisplay(){
+    score.textContent = `Wins: ${wins}, Losses: ${losses}, Ties: ${ties}.`;
+    if (gameCount === 5){
+        score.textContent += findWhoWon();
+    }
+}
 
 rock.addEventListener('click', () => {
     let cS = getComputerChoice()
     let res = playRound("Rock", cS);
     results.textContent += resultHelper("Rock", cS, res);
+    incrementResults(res);
+    updateDisplay();
+    if (gameCount === 5){
+        buttons.forEach((button) => {button.disabled = true;})
+    }
 });
 paper.addEventListener('click', () => {
     let cS = getComputerChoice()
     let res = playRound("Paper", cS);
     results.textContent += resultHelper("Paper", cS, res);
+    incrementResults(res);
+    updateDisplay();
+    if (gameCount === 5){
+        buttons.forEach((button) => {button.disabled = true;})
+    }
 });
 scissors.addEventListener('click', () => {
     let cS = getComputerChoice()
     let res = playRound("Scissors", cS);
     results.textContent += resultHelper("Scissors", cS, res);
+    incrementResults(res);
+    updateDisplay();
+    if (gameCount === 5){
+        buttons.forEach((button) => {button.disabled = true;})
+    }
 });
+
+const score = document.createElement('div');
+score.textContent = `Wins: ${wins}, Losses: ${losses}, Ties: ${ties}.`;
+
+const body = document.querySelector('body');
+body.appendChild(score);
+
+
 
